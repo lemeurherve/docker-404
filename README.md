@@ -1,4 +1,8 @@
-# Jenkins Infra: 404
+
+![GitHub Logo](html/images/fire-jenkins.svg.png)
+
+# 404
+
 ## Build
 Build docker image: ``` make build```
 
