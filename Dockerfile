@@ -1,4 +1,4 @@
-FROM nginx:1.13
+FROM nginx:alpine
 
 LABEL \
   Description="Jenkins 404 website" \
