@@ -1,0 +1,5 @@
+buildDockerAndPublishImage('404', [
+  mainBranch: 'main',
+  automaticSemanticVersioning: true,
+  gitCredentials: 'github-app-infra'
+])

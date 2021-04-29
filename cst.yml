@@ -1,0 +1,10 @@
+schemaVersion: 2.0.0
+metadataTest:
+  entrypoint: ["/docker-entrypoint.sh"]
+  cmd: ["nginx", "-g", "daemon off;"]
+  exposedPorts: ["80"]
+fileExistenceTests:
+  - name: 'nginx'
+    path: '/usr/sbin/nginx'
+    shouldExist: true
+    isExecutableBy: 'any'
