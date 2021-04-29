@@ -2,9 +2,25 @@ schemaVersion: 2.0.0
 metadataTest:
   entrypoint: ["/docker-entrypoint.sh"]
   cmd: ["nginx", "-g", "daemon off;"]
-  exposedPorts: ["80"]
+  exposedPorts: ["8080"]
 fileExistenceTests:
   - name: 'nginx'
     path: '/usr/sbin/nginx'
     shouldExist: true
     isExecutableBy: 'any'
+  - name: 'Nginx user home exists and is the cache directory'
+    path: '/var/cache/nginx'
+    shouldExist: true
+  - name: 'Nginx logs directory exists'
+    path: '/var/log/nginx'
+    shouldExist: true
+fileContentTests:
+  - name: 'Default user nginx exists with the correct UID/GID'
+    path: '/etc/passwd'
+    expectedContents: ['.*nginx:x:.*:nginx:/var/cache/nginx:/sbin/nologin.*']
+  - name: 'Default nginx vhost listens on the unprivileged 8080 port for HTTP'
+    path: '/etc/nginx/conf.d/default.conf'
+    expectedContents: ['.*listen.*8080.*']
+  - name: 'Default nginx configuration writes pid file into the custom directory'
+    path: '/etc/nginx/nginx.conf'
+    expectedContents: ['.*pid.*/var/run/nginx/nginx.pid;.*']
