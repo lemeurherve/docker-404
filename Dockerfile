@@ -1,4 +1,4 @@
-FROM nginx@sha256:af466e4f12e3abe41fcfb59ca0573a3a5c640573b389d5287207a49d1324abd8
+FROM nginx:1.20.2-alpine
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY conf.d/default.conf /etc/nginx/conf.d/default.conf
