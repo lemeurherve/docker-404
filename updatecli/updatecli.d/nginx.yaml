@@ -1,5 +1,4 @@
----
-title: "Bump nginx version"
+name: Bump Nginx version
 
 scms:
   default:
@@ -20,17 +19,17 @@ scms:
 
 sources:
   latestRelease:
-    name: Get latest stable version of nginx
-    kind: gitTag
-    scmID: nginxGithubMirror
+    name: Get latest stable version of Nginx
+    kind: gittag
+    scmid: nginxGithubMirror
     spec:
-      versionFilter:
+      versionfilter:
         kind: regex
         ## Nginx stable version have the minor digit as an even number
         pattern: 'release-(\d+)\.(\d*[0|2|4|6|8])\.(\d+)'
     transformers:
-      - trimPrefix: "release-"
-      - addSuffix: "-alpine"
+      - trimprefix: "release-"
+      - addsuffix: "-alpine"
 
 targets:
   dockerfile:
@@ -41,14 +40,12 @@ targets:
       instruction:
         keyword: "FROM"
         matcher: "nginx"
-    scmID: default
+    scmid: default
 
-pullrequests:
+actions:
   default:
-    kind: github
-    scmID: default
-    targets:
-      - dockerfile
+    kind: github/pullrequest
+    scmid: default
     spec:
       labels:
         - dependencies
